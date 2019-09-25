@@ -237,7 +237,7 @@ header h1 {
      padding: 10px 0 0 28px;
      outline: 0;
      width: 650px;
-     height: 920px;
+     height: 1020px;
      color: black;
 }
 .button-display-topright {
@@ -265,6 +265,10 @@ header h1 {
 }
 .slides-div > h2 {
      margin-left: 15px;
+}
+.eleven-images {
+     width: 450px;
+     height: auto;
 }
 .slides-div > h3 {
      margin-left: 15px;
@@ -380,11 +384,11 @@ header h1 {
      .modal-content {
           padding: 15px;
           width: 50%;
-          height: 720px;
+          height: 820px;
      }
      .eleven-images {
-          width: auto;
-          height: 295px;
+          width: 300px;
+          height: auto;
      }
      .button-display-topright {
           margin-left: 5px;
@@ -456,14 +460,14 @@ header h1 {
           padding: 15px 0 0 18px;
      }
      .eleven-images {
-          width: 90%;
+          width: 250px;
           height: auto;
      }
      .button-display-topright {
           margin-left: 0;
      }
      .slides-div {
-          padding-top: 20px;
+          padding-top: 0;
      }
      .slides-div > h2 {
           font-size: 1.350em;
@@ -500,8 +504,8 @@ header h1 {
           display: none;
           }
      .flip-card, .flip-card-bottom > img {
-     width: 70px;
-     height: 98px;
+     width: 65px;
+     height: 91px;
      }
      #row1{
           margin-top: 0px;

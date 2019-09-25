@@ -17,6 +17,9 @@ let objectURL = [];
 let apiURL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/';
 let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 let isMac = (navigator.userAgent.indexOf('Mac OS X') != -1);
+// let slideContainerSize = $('.modal-container').width();
+// let imageSize = $('.eleven-images').width();
+// let imageLeftMargin = (slideContainerSize - imageSize) / 2; 
 
 //  The Fisher-Yates algorithm works by picking one random element for each original array element, and then excluding it from the next draw. Just like randomly picking from a deck of cards.
 //  This exclusion is done in a clever way (invented by Durstenfeld for use by computers) by swapping the picked element with the current element, and then picking the next random element from the remainder. For optimal efficiency, the loop runs backwards so that the random pick is simplified.
@@ -66,10 +69,14 @@ function artInfoMobile() {
      $('.slides-div').show();
      $('.modal-content').css('background-color', 'transparent');
      $('#row1, #row2, #row3').hide();
-     $('.slides-div').css({'margin-top': '45px'});
+     $('.slides-div').css({'margin-top': '10px'});
+     let slideContainerSize = $('.modal-container').width();
+     let imageSize = $('.eleven-images').width();
+     let imageLeftMargin = (slideContainerSize - imageSize) / 2;
+     $('.eleven-images').css('margin-left', imageLeftMargin + 'px');
      $('.button-display-topright').css({
      'position': 'fixed',
-     'margin': '10px 0 0 10px',
+     'margin': '5px 0 0 10px',
      'font-size': '2.200em'
      });
 }
@@ -84,6 +91,10 @@ function artInfo() {
           $('.slides-div').show();
           $('.modal-content').css({'background-color': 'transparent'});
           $('.slides-div').css({'margin-top': '45px'});
+          let slideContainerSize = $('.modal-container').width();
+          let imageSize = $('.eleven-images').width();
+          let imageLeftMargin = (slideContainerSize - imageSize) / 2;
+          $('.eleven-images').css('margin-left', imageLeftMargin + 'px');
           $('.button-display-topright').css({
           'position': 'fixed',
           'margin': '20px 0 0 25px',
@@ -93,6 +104,10 @@ function artInfo() {
      else {
           $('#win-restart').css('display', 'none');
           $('#modal-slides').css('display', 'block');
+          let slideContainerSize = $('.modal-container').width();
+          let imageSize = $('.eleven-images').width();
+          let imageLeftMargin = (slideContainerSize - imageSize) / 2;
+          $('.eleven-images').css('margin-left', imageLeftMargin + 'px');
           var slideIndex = 1;
           showDivs(slideIndex);
 
@@ -198,7 +213,7 @@ function compareImagesMobile() {
           x = 0;
           storedEventData = [];
           matches++
-          if (matches === 6) {
+          if (matches === 1) {
                $('#win-restart').css("display", "block");
           }
           }
@@ -324,7 +339,7 @@ function compareImagesMobile() {
                     x = 0;
                     storedEventData = [];
                     matches++;
-                    if (matches === 9) {
+                    if (matches === 1) {
                          $('#win-restart').css("display", "block");
                     }
                     }
