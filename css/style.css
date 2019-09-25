@@ -28,11 +28,10 @@ header {
      text-align: center;
      font-size: 2.250em;
      letter-spacing: 0.375em;
-     color: rgba(245, 242, 237, 0.8);
 }
 header h1 {
      margin: 15px 0 70px 0;
-     color: rgba(245, 245, 245, 0.6);
+     color: rgba(245, 245, 245, 0.7);
 }
 #play-div {
      display: flex;
@@ -47,7 +46,7 @@ header h1 {
      text-decoration: none;
      outline: none;
      text-align: center;
-     color: rgba(245, 245, 245, 0.6);
+     color: rgba(245, 245, 245, 0.7);
      background-color: rgba(240, 255, 240, 0.2);
      border-radius: 50%;
      display: block;
