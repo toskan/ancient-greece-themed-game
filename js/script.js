@@ -17,9 +17,6 @@ let objectURL = [];
 let apiURL = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/';
 let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 let isMac = (navigator.userAgent.indexOf('Mac OS X') != -1);
-// let slideContainerSize = $('.modal-container').width();
-// let imageSize = $('.eleven-images').width();
-// let imageLeftMargin = (slideContainerSize - imageSize) / 2; 
 
 //  The Fisher-Yates algorithm works by picking one random element for each original array element, and then excluding it from the next draw. Just like randomly picking from a deck of cards.
 //  This exclusion is done in a clever way (invented by Durstenfeld for use by computers) by swapping the picked element with the current element, and then picking the next random element from the remainder. For optimal efficiency, the loop runs backwards so that the random pick is simplified.
@@ -170,7 +167,7 @@ function useData(jsonData) {
      objectMedium[objectMedium.length] = jsonData.medium;
      objectDate[objectDate.length] = jsonData.objectDate;
      objectURL[objectURL.length] = jsonData.objectURL;
-     $('.slides-content').prepend('<div class="slides-div"><h2 class="object-name">' + objectName[count] + '<h2><img class="eleven-images" src=' + elevenImages[count] + '><h3 class="object-country">' + objectCountry[count] + '</h3><h3 class="object-date">' + objectDate[count] + '</h3><h3 class="object-medium">' + objectMedium[count] + '</h3><ul class="met-link-ul"><li class="met-link-li"><a class="met-link-a" href=' + objectURL[count] + '>More info at the Metropolitan Museum</a></li></ul></div>');
+     $('.slides-content').prepend('<div class="slides-div"><h2 class="object-name">' + objectName[count] + '</h2><img class="eleven-images" src=' + elevenImages[count] + '><h3 class="object-country">' + objectCountry[count] + '</h3><h3 class="object-date">' + objectDate[count] + '</h3><h3 class="object-medium">' + objectMedium[count] + '</h3><ul class="met-link-ul"><li class="met-link-li"><a class="met-link-a" href=' + objectURL[count] + '>More info at the Metropolitan Museum</a></li></ul></div>');
      count++;
      $('.met-link-a').attr('target', '_blank');
 }
