@@ -1,0 +1,547 @@
+/*
+Project Name: Card Match Game
+Author: Tamar Oskanian
+Developer: tamar.oskanian@gmail.com in NYC
+*/
+
+* {
+   -moz-box-sizing: border-box; 
+   -webkit-box-sizing: border-box; 
+   box-sizing: border-box; 
+}
+body {
+     color: darkgray; 
+     font-style:  'PT Sans', sans-serif;
+     margin: 0;
+     background: url(../images/minoan_fresco.jpg) no-repeat center center fixed;
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover; 
+     background-size: cover;
+     background-color: darkgrey;
+}
+.play-body {
+     background-color: #bbb;
+}
+header {
+     margin: 0;
+     text-align: center;
+     font-size: 2.250em;
+     letter-spacing: 0.375em;
+     color: rgba(245, 242, 237, 0.8);
+}
+header h1 {
+     margin: 15px 0 70px 0;
+     color: rgba(245, 245, 245, 0.6);
+}
+#play-div {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     height: 48vh; 
+}
+#play {
+     font-size: 2.875em;
+     font-weight: 800;
+     text-decoration: none;
+     outline: none;
+     text-align: center;
+     color: rgba(245, 245, 245, 0.6);
+     background-color: rgba(240, 255, 240, 0.2);
+     border-radius: 50%;
+     display: block;
+     height: 175px;
+     width: 175px;
+     line-height: 175px;
+}
+@-webkit-keyframes bounce {
+     from { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+     to   { -webkit-transform: translate3d(0, 0.200em, 0); transform: translate3d(0, 10px, 0); }
+}
+@keyframes bounce {
+     from { transform: translate3d(0, 0, 0);     }
+     to   { transform: translate3d(0, 0.200em, 0); }
+}
+#play:hover {
+     font-size: 3.250em;
+     height: 190px;
+     width: 190px;
+     line-height: 190px;
+     -webkit-animation-name: bounce;
+     -webkit-animation-duration: 1s;
+     -webkit-animation-direction: alternate;
+     -webkit-animation-timing-function: cubic-bezier((0.7, 0.7, 0.7, 0.7));
+     -webkit-animation-iteration-count: infinite;
+     animation: bounce 1s cubic-bezier(0.7, 0.7, 0.7, 0.7);
+     animation-direction: alternate;
+     animation-iteration-count: infinite;
+} 
+.container {
+     height: 100vh;
+}
+#row1, #row2, #row3 {
+     width: 98%;
+     display: flex;
+     flex-direction: row; 
+     justify-content: space-around;
+     height: 30vh;
+     padding: 3%;
+}
+#row1{
+     margin-top: 25px;
+}
+#row2 {
+     margin-top: 10px;
+}
+#row3 {
+     margin-top: 15px;
+}
+/* Div that contains all the elements of the card.*/
+.flip-card {
+     background-color: transparent;
+     width: 130px;
+     height: 182px;
+     -webkit-perspective: 700px;
+     perspective: 700px; 
+     outline: none;
+    /* this also has transition added in some examples  */
+}
+.flip-card-bottom > img {
+     width: 130px;
+     height: 182px;
+     /* ratio is 7 / 5 */
+}
+/* This div positions the top and bottom */
+.flip-card-inner {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     -webkit-transform-style: preserve-3d;  
+     transform-style: preserve-3d;
+     transition: 0.9s ease-in;
+     -webkit-transition: 0.9s ease-in;
+     -moz-transition: 0.9s ease-in;
+     -ms-transition: 0.9s ease-in;
+     -o-transition: 0.9s ease-in;
+     -webkit-tap-highlight-color: transparent; 
+     /* transform-style preserve 3d messes up in microsoft edge */
+}
+/* Position of top and bottom */
+.flip-card-top, .flip-card-bottom {
+     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);  
+     position: absolute;
+     width: 100%;
+     height: 100%;
+}
+.flip-card-top {
+     background: url(../images/card_top.jpeg) no-repeat;
+     background-size: cover;
+     background-position: center;
+     background-color: black;
+     -webkit-backface-visibility: hidden;
+     -moz-backface-visibility: hidden;
+     -o-backface-visibility: hidden;
+     backface-visibility: hidden;
+}
+     .flip-card-bottom {
+     transform: rotateY( -180deg );
+     -webkit-transform: rotateY( -180deg );
+     -moz-transform: rotateY( -180deg );
+     -o-transform: rotateY( -180deg );
+     background-color: transparent;
+     -webkit-backface-visibility: hidden; 
+     -moz-backface-visibility: hidden;
+     -o-backface-visibility: hidden;
+     backface-visibility: hidden; 
+     } 
+.flip {
+     transform: rotateY(180deg);
+     -webkit-transform: rotateY(180deg);
+     -ms-transform: rotateY(180deg);
+     -moz-transform: rotateY(180deg); 
+     -o-transform: rotateY( 180deg );
+}
+.container {
+     display: none;
+}
+#win-restart {
+     display: none;
+}
+.win-restart-modal {
+     z-index: 3;
+     padding-top: 150px;
+     position: fixed;
+     left: 0;
+     top: 0;
+     width:100%;
+     height:100%;
+     overflow: auto;
+     background-color: rgba(94,107,119,); 
+}
+.win-restart-content {
+     margin: auto;
+     background-color: lightgrey;
+     position: relative;
+     padding: 10px;
+     outline: 0;
+     width: 350px;
+     color: black;
+}
+.button-win-restart-topright {
+     cursor: pointer;
+     position: absolute;
+     left: 0;
+     top: 0;
+     font-size: 1.800em;
+     margin-left: 5px;
+}
+#h2-win {
+     margin-left: 35px;
+}
+#win-list {
+     list-style: none;
+}
+.win-li {
+     display: inline-block;
+     padding: 15px;
+}
+#win-li-border {
+     border-left: 1px solid black;
+}
+.win-a {
+     text-decoration: none;
+     outline: none;
+     color: black;
+     cursor: pointer;
+}
+.win-a:hover {
+     color: darkgrey;
+}
+#modal-slides {
+     display: none;
+}
+.modal {
+     z-index: 3;
+     position: fixed;
+     left: 0;
+     top: 0;
+     width:100%;
+     height:100%;
+     overflow: auto;
+     background-color: rgba(94,107,119, 0.2);
+}
+.modal-content {
+     margin: auto;
+     background-color: lightgrey;
+     position: relative;
+     padding: 10px 0 0 28px;
+     outline: 0;
+     width: 650px;
+     height: 920px;
+     color: black;
+}
+.button-display-topright {
+     cursor: pointer;
+     position: absolute;
+     left: 0;
+     top: 0;
+     font-size: 2.000em;
+     margin-left: 8px;
+}
+.met-link-ul {
+     list-style: none;
+     margin-left: -25px;
+}
+.met-link-a {
+     text-decoration: none;
+     outline: none;
+     color: black;
+}
+.met-link-a:hover {
+     color: darkgrey;
+}
+.slides-div {
+     display: none;
+}
+.slides-div > h2 {
+     margin-left: 15px;
+}
+.slides-div > h3 {
+     margin-left: 15px;
+}
+.display-left {
+     cursor: pointer;
+     position: absolute;
+     top: 50%;
+     left: 0%;
+     transform: translate(0%,-50%);
+     -ms-transform:translate(-0%,-50%);
+     -webkit-transform: translate(0%,-50%);
+     font-size: 1.700em;
+     background-color: lightgrey;
+     -webkit-tap-highlight-color: transparent;
+     outline: none;
+     padding: 0;
+     border: none;
+     margin-left: 5px;
+}
+.display-right {
+     cursor: pointer;
+     position: absolute;
+     top: 50%;
+     right: 0%;
+     transform: translate(0%,-50%);
+     -ms-transform: translate(0%,-50%);
+     -webkit-transform: translate(0%,-50%);
+     font-size: 1.700em;
+     background-color: lightgrey;
+     -webkit-tap-highlight-color: transparent;
+     outline: none;
+     padding: 0;
+     border: none;
+     margin-right: 5px;
+}
+
+/* tablets */
+@media screen and (max-width: 768px)  and (orientation: portrait) {
+     .flip-card, .flip-card-bottom > img {
+     width: 102.5px;
+     height: 143.5px;
+     }
+     .win-restart-modal {
+          padding-top: 130px; 
+     }
+     .win-restart-content {
+          padding: 35px;
+          width: 50%;
+     }
+     #h2-win {
+          margin-left: 40px;
+          font-size: 1.500em;
+     }
+     .button-display-topright {
+          font-size: 2.800em;
+          margin-left: 8px;
+     }
+     .win-li {
+          padding: 10px;
+          font-size: 1.250em;
+     }
+     .eleven-images {
+          width: 70%;
+          height: auto;
+     }
+     .modal-content {
+          width: 95%;
+          height: 1500px;
+          padding: 10px 0 0 28px;
+     }
+     .button-display-topright {
+          padding-left: 3px;
+     }
+     .slides-div > h2 {
+          font-size: 1.800em;
+     }
+     .slides-div > h3 {
+          font-size: 1.300em;
+     }
+     .met-link-li {
+          font-size: 1.300em;
+     }
+     .display-left {
+          font-size: 2.000em;
+          margin-left: 5px;
+     }
+     .display-right {
+          font-size: 2.000em;
+          margin-right: 5px;
+     }
+}
+@media screen and (max-width: 1024px)  and (orientation: landscape) {
+     .flip-card, .flip-card-bottom > img {
+          width: 102.5px;
+          height: 143.5px;
+     }
+     .win-restart-content {
+          padding: 30px;
+          width: 40%;
+     }
+     #h2-win {
+          margin-left: 40px;
+          font-size: 1.500em;
+     }
+     .win-li {
+          padding: 10px;
+          font-size: 1.250em;
+     }
+     .modal {
+          padding-top: 10px;
+     }
+     .modal-content {
+          padding: 15px;
+          width: 50%;
+          height: 720px;
+     }
+     .eleven-images {
+          width: auto;
+          height: 295px;
+     }
+     .button-display-topright {
+          margin-left: 5px;
+     }
+     .slides-div > h2 {
+          font-size: 1.800em;
+     }
+     .slides-div > h3 {
+          font-size: 1.300em;
+     }
+     .met-link-li {
+          font-size: 1.300em;
+     }
+     .display-left {
+          font-size: 2.000em;
+          margin-left: 5px;
+     }
+     .display-right {
+          font-size: 2.000em;
+          margin-right: 5px;
+     }
+}
+
+@media screen and (max-width: 414px)  and (orientation: portrait) {
+     header {
+          letter-spacing: 0.1em;
+     }
+     #play {
+          height: 140px;
+          width: 140px;
+          line-height: 140px;
+     }
+     #play:hover {
+          height: 145px;
+          width: 145px;
+          line-height: 145px;
+     } 
+     #flip-card-4, #flip-card-5, #flip-card-10, #flip-card-11, #flip-card-16, #flip-card-17 {
+     display: none;
+     }
+     .flip-card, .flip-card-bottom > img {
+     width: 60px;
+     height: 84px;
+     }
+     .win-restart-modal {
+          padding-top: 90px; 
+     }
+     .win-restart-content {
+          padding: 12px;
+          width: 90%;
+     }
+     #h2-win {
+          margin-left: 40px;
+          font-size: 1.250em;
+     }
+     .win-li {
+          padding: 10px;
+          font-size: 1.000em;
+     }
+     .modal-content {
+          width: 95%;
+          padding: 15px 0 0 18px;
+     }
+     .eleven-images {
+          width: 90%;
+          height: auto;
+     }
+     .button-display-topright {
+          margin-left: 0;
+     }
+     .slides-div {
+          padding-top: 20px;
+     }
+     .slides-div > h2 {
+          font-size: 1.350em;
+     }
+     .slides-div > h3 {
+          font-size: 1.200em;
+     }
+     .met-link-li {
+          font-size: 1.100em;
+     }
+}
+
+@media screen and (max-width: 823px)  and (orientation: landscape) {
+     header {
+          letter-spacing: 0.2em;
+     }
+     #play {
+          height: 120px;
+          width: 120px;
+          line-height: 120px;
+     }
+     #play:hover {
+          height: 125px;
+          width: 125px;
+          line-height: 125px;
+     } 
+     #flip-card-4, #flip-card-5, #flip-card-10, #flip-card-11, #flip-card-16, #flip-card-17 {
+          display: none;
+          }
+     .flip-card, .flip-card-bottom > img {
+     width: 70px;
+     height: 98px;
+     }
+     #row1{
+          margin-top: 0px;
+     }
+     #row2 {
+          margin-top: 5px;
+     }
+     #row3 {
+          margin-top: 5px;
+     }
+     .win-restart-modal {
+          padding-top: 60px; 
+     }
+     .win-restart-content {
+          padding: 10px;
+          width: 50%;
+     }
+     #h2-win {
+          margin-left: 50px;
+          font-size: 1.250em;
+     }
+     .modal {
+          padding-top: 0;
+     }
+     .modal-content {
+          padding: 10px 0 0 28px;
+          width: 65%;
+     }
+     .modal-slides {
+          padding-top: 0;
+     }
+     .slides-div {
+          margin-top: 15px;
+     }
+     .eleven-images {
+          width: 45%;
+          height: auto;
+     }
+     .button-display-topright {
+          margin-left: 5px;
+     }
+     .slides-div {
+          padding: 5px 0 0 4px;
+     }
+     .slides-div > h2 {
+          font-size: 1.250em;
+     }
+     .slides-div > h3 {
+          font-size: 1.000em;
+     }
+     .met-link-li {
+          font-size: 1.000em;
+     }
+}
+
