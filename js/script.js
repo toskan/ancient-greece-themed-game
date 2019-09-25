@@ -27,6 +27,16 @@ function shuffleArray(array) {
      }
 }
 
+function mobileBackground() {
+     $('body').css({
+          'background': 'url(./images/minoan_fresco5.jpg) no-repeat center center fixed',
+          '-webkit-background-size': 'cover',
+          '-moz-background-size': 'cover',
+          '-o-background-size': 'cover',
+          'background-size': 'cover'
+     });
+}
+
 function startPlay() {
      $('#header-play-div').hide();
      $('.container').show();
@@ -229,6 +239,8 @@ function compareImagesMobile() {
           $(window).resize(function () {
                $('body').css('height', window.innerHeight);
           });
+
+          mobileBackground();
 
           $('#play').click(startPlay);
 

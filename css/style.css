@@ -5,9 +5,9 @@ Developer: tamar.oskanian@gmail.com in NYC
 */
 
 * {
-   -moz-box-sizing: border-box; 
-   -webkit-box-sizing: border-box; 
-   box-sizing: border-box; 
+     -moz-box-sizing: border-box; 
+     -webkit-box-sizing: border-box; 
+     box-sizing: border-box; 
 }
 body {
      color: darkgray; 
@@ -410,12 +410,19 @@ header h1 {
 
 @media screen and (max-width: 414px)  and (orientation: portrait) {
      header {
-          letter-spacing: 0.1em;
+          letter-spacing: 0.05em;
+          font-size: 1.800em;
+     }
+     header h1 {
+          margin: 10px 0 35px 0;
+          color: rgba(245, 245, 245, 0.4);
      }
      #play {
           height: 140px;
           width: 140px;
           line-height: 140px;
+          font-size: 2.500em;
+          background-color: rgba(240, 255, 240, 0.4);
      }
      #play:hover {
           height: 145px;
@@ -473,10 +480,16 @@ header h1 {
      header {
           letter-spacing: 0.2em;
      }
+     header h1 {
+          margin: 10px 0 35px 0;
+          color: rgba(245, 245, 245, 0.4);
+     }
      #play {
           height: 120px;
           width: 120px;
           line-height: 120px;
+          font-size: 2.500em;
+          background-color: rgba(240, 255, 240, 0.4);
      }
      #play:hover {
           height: 125px;
